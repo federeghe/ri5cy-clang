@@ -6148,7 +6148,12 @@ public:
           setFeatureEnabled(Features, "rv32", true);
       }else if(CPU.find("RV64") == 0){
           setFeatureEnabled(Features, "rv64", true);
+      } else if(CPU.find("R5CY") == 0) {
+          setFeatureEnabled(Features, "r5cy", true);
+          setFeatureEnabled(Features, "rv32", true);
+          setFeatureEnabled(Features, "m", true);
       }
+
       if(CPU.find("M") != std::string::npos)
         setFeatureEnabled(Features, "m", true);
       if(CPU.find("A") != std::string::npos)
@@ -6163,7 +6168,7 @@ public:
 			   StringRef Name,
 			   bool Enabled) const override {
       if (Name == "m" || Name == "a" || Name == "f" ||
-	  Name == "d" || Name == "rv32" || Name == "rv64") { 
+	  Name == "d" || Name == "rv32" || Name == "rv64" || Name=="r5cy") { 
 	Features[Name] = Enabled;
       }
     }

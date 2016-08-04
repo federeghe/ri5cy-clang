@@ -1409,11 +1409,21 @@ static void getRISCVTargetCPU(const ArgList &Args,
     CmdArgs.push_back("-target-feature");
     CmdArgs.push_back("-rv64");
     parseRISCVExtensions(MArch.drop_front(4), CmdArgs);
-  }else if(MArch.startswith("RV64")) {
+  } else if(MArch.startswith("RV64")) {
     CmdArgs.push_back("-target-feature");
     CmdArgs.push_back("+rv64");
     parseRISCVExtensions(MArch.drop_front(4), CmdArgs);
-  }else{
+  } else if(MArch.startswith("R5CY")) {
+    CmdArgs.push_back("-target-feature");
+    CmdArgs.push_back("+rv32");
+    CmdArgs.push_back("-target-feature");
+    CmdArgs.push_back("+r5cy");
+    CmdArgs.push_back("-target-feature");
+    CmdArgs.push_back("-rv64");
+    CmdArgs.push_back("-target-feature");
+    CmdArgs.push_back("+m");
+    parseRISCVExtensions(MArch.drop_front(4), CmdArgs);
+  } else {
     //default to RV64I
     CmdArgs.push_back("-target-feature");
     CmdArgs.push_back("+rv64");
